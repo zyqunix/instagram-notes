@@ -10,6 +10,7 @@ Display your current Last.fm activity on your Instagram notes!
 
   - **Downloading repo**
     - ```git clone https://github.com/zyqunix/instagram-notes.git```
+    - Go into main.py, add your Instagram username & password and Last.fm username & API key
   
   - **Linux 🐧**
     - ```python -m venv venv && source venv/bin/activate```
