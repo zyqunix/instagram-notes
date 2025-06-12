@@ -6,14 +6,19 @@ from datetime import datetime
 import pytz
 import random
 
-USERNAME = "" # instagram username
-PASSWORD = "" # instagram password
+from dotenv import load_dotenv
+import os
 
-LASTFM_API_KEY = "" # lastfm api key
-LASTFM_USERNAME = "" # lastfm username
+load_dotenv()
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
+
+LASTFM_API_KEY = os.getenv("LASTFM_API_KEY")
+LASTFM_USERNAME = os.getenv("LASTFM_USERNAME")
+
 COOKIE_PATH = Path(f"{USERNAME}.json")
 OUTPUT_FILE = Path("notes.txt")
-CET = pytz.timezone("") # timezone e.g Europe/Berlin
+CET = pytz.timezone("Europe/Berlin")
 
 
 def generate_cookie(username, password):
@@ -38,7 +43,7 @@ def get_latest_track(username, api_key):
         artist = track["artist"]["#text"]
         song = track["name"]
         return f"{artist} - {song}"
-    return None
+    return None, None
 
 def get_song_lyrics(artist, track):
     response = requests.get(url=f"https://lrclib.net/api/get?artist_name={artist}&track_name={track}")
@@ -87,7 +92,7 @@ def main():
                     f.write(f"[{now}] {note_text}\n")
                 previous_note_text = note_text
                 i += 1
-        time.sleep(60)
+        time.sleep(30)
 
 if __name__ == "__main__":
     main()
